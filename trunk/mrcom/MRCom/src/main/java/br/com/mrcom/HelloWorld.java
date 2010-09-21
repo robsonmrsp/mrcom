@@ -1,4 +1,4 @@
-package br.com.comerce;
+package br.com.mrcom;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
