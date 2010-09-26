@@ -15,16 +15,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- The version of Weld extensions in use -->
 		<weld.extensions.version>1.0.0-CR2</weld.extensions.version>
+		<org.springframework.version>3.0.0.RELEASE</org.springframework.version>
 	</properties>
 
 	<repositories>
 		<!-- Several key Java EE APIs and RIs are missing from the Maven Central 
 			Repository -->
-		<!-- The goal is to eventually eliminate the reliance on the JBoss repository -->
+		<!-- Repositório do jboss -->
 		<repository>
 			<id>repository.jboss.org</id>
 			<name>JBoss Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss
+			</url>
 		</repository>
 
 		<repository>
@@ -61,6 +63,30 @@
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>3.0.0.RELEASE</version>
+		</dependency>
+		<!-- Web application development utilities applicable to both Servlet and 
+			Portlet Environments (depends on spring-core, spring-beans, spring-context) 
+			Define this if you use Spring MVC, or wish to use Struts, JSF, or another 
+			web framework with Spring (org.springframework.web.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!-- Spring MVC for Servlet Environments (depends on spring-core, spring-beans, 
+			spring-context, spring-web) Define this if you use Spring MVC with a Servlet 
+			Container such as Apache Tomcat (org.springframework.web.servlet.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
 		</dependency>
 
 		<!-- JSF 2.0 API -->
@@ -124,23 +150,40 @@
 			<version>4.0.0.GA</version>
 		</dependency>
 
+
+		<!-- Historically both Hibernate Annotations and Hibernate EntityManager 
+			were versioned and released from Hibernate Core. As of Hibernate Core version 
+			3.5. Eventually the documentation for all 3 will be consolidated as well. 
+			Devemos ter a mesma versao para o hibernate-core e o hibernate annotations. -->
+
+
+
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>3.5.5-Final</version>
 		</dependency>
 
+		<!-- -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
-			<version>3.3.0.ga</version>
+			<version>3.5.5-Final</version>
 		</dependency>
 
 
+		<!-- driver do postgresql -->
 		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>8.4-701.jdbc4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.java-persistence</groupId>
+			<artifactId>jpa-api</artifactId>
+			<version>2.0-cr-1</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -182,7 +225,8 @@
 					<contextPath>${project.build.finalName}</contextPath>
 					<!-- Where the BeanManager is constructed. This is where you'll declare 
 						datasources. -->
-					<jettyEnvXml>${basedir}/src/test/resources/jetty-env.xml</jettyEnvXml>
+					<jettyEnvXml>${basedir}/src/test/resources/jetty-env.xml
+					</jettyEnvXml>
 					<!-- This parameter will auto-deploy modified classes. -->
 					<!-- You can save changes in a file or class and refresh your browser 
 						to view the changes. -->
