@@ -12,7 +12,7 @@ public class HibernateEstadoDaoTest {
 	private HibernateEstadoDao dao = new HibernateEstadoDao(Estado.class);
 	
 	@Test
-	public void testDeleta1() {
+	public void testDeletaInit() {
 		estado.setUf("AM");
 		dao.deleta(estado);
 		estado = null;
