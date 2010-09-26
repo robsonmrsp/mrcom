@@ -22,13 +22,13 @@ public class Estado implements Serializable{
 	private String faixaCep1Ini;
 	
 	@Column(name="EST_FAIXA_CEP1_FIM")
-	private String faixaCep1fim;
+	private String faixaCep1Fim;
 	
 	@Column(name="EST_FAIXA_CEP2_INI")
 	private String faixaCep2Ini;
 	
 	@Column(name="EST_FAIXA_CEP2_FIM")
-	private String faixaCep2fim;
+	private String faixaCep2Fim;
 	
 	public Estado() {
 	
@@ -59,12 +59,12 @@ public class Estado implements Serializable{
 		this.faixaCep1Ini = faixaCep1Ini;
 	}
 
-	public String getFaixaCep1fim() {
-		return faixaCep1fim;
+	public String getFaixaCep1Fim() {
+		return faixaCep1Fim;
 	}
 
-	public void setFaixaCep1fim(String faixaCep1fim) {
-		this.faixaCep1fim = faixaCep1fim;
+	public void setFaixaCep1Fim(String faixaCep1fim) {
+		this.faixaCep1Fim = faixaCep1fim;
 	}
 
 	public String getFaixaCep2Ini() {
@@ -75,12 +75,12 @@ public class Estado implements Serializable{
 		this.faixaCep2Ini = faixaCep2Ini;
 	}
 
-	public String getFaixaCep2fim() {
-		return faixaCep2fim;
+	public String getFaixaCep2Fim() {
+		return faixaCep2Fim;
 	}
 
-	public void setFaixaCep2fim(String faixaCep2fim) {
-		this.faixaCep2fim = faixaCep2fim;
+	public void setFaixaCep2Fim(String faixaCep2fim) {
+		this.faixaCep2Fim = faixaCep2fim;
 	}
 
 	@Override
@@ -112,8 +112,4 @@ public class Estado implements Serializable{
 	public void init() {
 
 	}
-	
-	
-	
-	
 }

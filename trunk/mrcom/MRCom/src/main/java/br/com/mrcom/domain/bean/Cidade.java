@@ -112,9 +112,4 @@ public class Cidade implements Serializable{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
-
-
 }
