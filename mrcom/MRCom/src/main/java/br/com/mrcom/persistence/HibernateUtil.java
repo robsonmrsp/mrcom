@@ -19,7 +19,7 @@ public class HibernateUtil {
 		.setProperty(Environment.PASS, "162940")
 		.setProperty(Environment.SHOW_SQL, "true")
 		.setProperty(Environment.FORMAT_SQL, "true")
-		//.setProperty(Environment.HBM2DDL_AUTO, "update")
+		.setProperty(Environment.HBM2DDL_AUTO, "update")
 		//para corrigir o problema do  No CurrentSessionContext configured!d
 		.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread")
 		.addAnnotatedClass(br.com.mrcom.domain.bean.Bairro.class)
