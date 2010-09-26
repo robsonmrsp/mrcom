@@ -39,9 +39,9 @@ public class FaceCliente {
 	private Object valorParametroBusca = "";
 	private String nomeParametroBusca = "";
 	
-	//controle de paginaÃ§Ã£o. 
+	//controle de paginacao. 
 	private String campoOrdenacao 		  = "codigo" ;
-	//deve definir se a ordenacao serÃ¡ crescente ou decrescentes
+	//deve definir se a ordenacao serao¡ crescente ou decrescentes
 	private String tipoOrdenacao 		  = "asc" ;
 	
 	private int numeroPaginaAtual 		  = 1;
@@ -286,7 +286,7 @@ public class FaceCliente {
 
 		if(ends == null || ends.size() ==0){
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
-			message.setSummary("O Cep -> " + cep + " nï¿½o ï¿½ um cep vï¿½lido.");
+			message.setSummary("O Cep -> " + cep + " nao é um cep valido.");
 			throw(new ValidatorException(message));
 		}else
 		{
@@ -378,7 +378,7 @@ public class FaceCliente {
 			FacesMessage message = new FacesMessage();
 			
 			message.setSeverity(FacesMessage.SEVERITY_INFO);
-			message.setSummary("Nï¿½o foi encontrado nenhum Cliente com o nome " + cliente.getNome());
+			message.setSummary("Nao foi encontrado nenhum Cliente com o nome " + cliente.getNome());
 			
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
