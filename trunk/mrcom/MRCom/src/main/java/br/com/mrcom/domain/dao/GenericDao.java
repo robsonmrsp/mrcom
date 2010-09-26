@@ -15,7 +15,7 @@ public interface GenericDao<T> {
 	
 	public T busca(Serializable s);
 	
-	/**Retorna uma lista de , no máximo <code>quantidade</code> registros e seguindo um numero de pagina definido em <code>pagina</code>
+	/**Retorna uma lista de , no maximo <code>quantidade</code> registros e seguindo um numero de pagina definido em <code>pagina</code>
 	 * 
 	 * @param quantidade quantidade de registros retornado por vez
 	 * @param pagina numero de pagina
