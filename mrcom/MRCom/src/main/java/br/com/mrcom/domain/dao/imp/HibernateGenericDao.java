@@ -1,6 +1,7 @@
 package br.com.mrcom.domain.dao.imp;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,10 @@ public class HibernateGenericDao<T> implements GenericDao<T> {
 	private Session session;
 	Class<T> clazz;
 
-	public HibernateGenericDao(Class<T> clazz) {
+	@SuppressWarnings("unchecked")
+	public HibernateGenericDao() {
 		System.out.println("HibernateGenericDao.HibernateGenericDao()");
-		this.clazz = clazz;
+		this.clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		this.session = HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 

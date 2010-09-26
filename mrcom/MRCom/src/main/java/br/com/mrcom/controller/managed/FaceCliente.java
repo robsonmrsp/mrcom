@@ -1,8 +1,6 @@
 package br.com.mrcom.controller.managed;
 
 import java.io.BufferedReader;
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,14 +19,19 @@ import javax.faces.validator.ValidatorException;
 
 import br.com.mrcom.domain.bean.Cliente;
 import br.com.mrcom.domain.bean.Endereco;
+import br.com.mrcom.domain.dao.imp.DaoFactory;
+import br.com.mrcom.domain.dao.imp.HibernateClienteDao;
+import br.com.mrcom.domain.dao.imp.HibernateEnderecoDao;
+import br.com.mrcom.domain.dao.imp.HibernateEstadoDao;
 import br.com.mrcom.domain.dao.imp.HibernateGenericDao;
 import br.com.mrcom.domain.elements.Cpf;
 import br.com.mrcom.util.Util;
 
 public class FaceCliente {
-
-	private HibernateGenericDao<Cliente> clienteDao 	= new HibernateGenericDao<Cliente>(Cliente.class);
-	private HibernateGenericDao<Endereco> enderecoDao 	= new HibernateGenericDao<Endereco>(Endereco.class);
+	
+    private DaoFactory factory = (DaoFactory) DaoFactory.instance(DaoFactory.class);
+    private HibernateClienteDao clienteDao = (HibernateClienteDao) factory.getClienteDao();
+	private HibernateEnderecoDao enderecoDao = (HibernateEnderecoDao) factory.getEnderecoDao();
 	
 	private	Cliente cliente ;
 	private	Cliente clientePesquisa ;
@@ -191,9 +194,9 @@ public class FaceCliente {
 
 		try {
 			File file = new File("D:\\Estudo\\Desenvolvimento\\nomes_pessoas.txt");
-			HibernateGenericDao<Cliente> daoCli = new HibernateGenericDao<Cliente>(Cliente.class);
+			HibernateClienteDao daoCli = (HibernateClienteDao) factory.getClienteDao();
 
-			HibernateGenericDao<Endereco> daoEnd = new HibernateGenericDao<Endereco>(Endereco.class);
+			HibernateEnderecoDao daoEnd = (HibernateEnderecoDao) factory.getEnderecoDao();
 
 			long intEnd = (int) (777329 * Math.random());
 			int numero = (int) (1000 * Math.random());
@@ -269,7 +272,6 @@ public class FaceCliente {
 
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
