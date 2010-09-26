@@ -1,6 +1,7 @@
 package br.com.mrcom.domain.bean;
 
 import java.io.Serializable;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,7 +19,6 @@ public class Cidade implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private static long contadorCidades ;
-
 
 	@Id
 	@Column(name="CID_CODIGO")

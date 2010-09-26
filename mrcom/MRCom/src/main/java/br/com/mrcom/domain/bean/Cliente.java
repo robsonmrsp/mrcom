@@ -34,8 +34,7 @@ public class Cliente {
 
 	@Embedded	
 	@AttributeOverrides({  
-		@AttributeOverride(name="valor",column=@Column(name="CLI_CPF")),  
-	})  
+		@AttributeOverride(name="valor",column=@Column(name="CLI_CPF"))})  
 	private Cpf cpf;
 
 	@Column(name="CLI_NOME")
@@ -56,8 +55,6 @@ public class Cliente {
 
 	@Column(name="CLI_ESTADO")
 	private String estado;
-	
-
 
 	@Column(name="CLI_PAIS")
 	private String pais;
@@ -238,5 +235,29 @@ public class Cliente {
 		endereco = new Endereco();		
 		cpf.init();		
 		endereco.init();
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
 }

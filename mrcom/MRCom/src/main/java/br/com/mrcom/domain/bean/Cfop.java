@@ -14,10 +14,10 @@ public class Cfop implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="CFO_CODIGO")
+	@Column(name="CFO_CODIGO", length=12, nullable=false)
 	private Integer codigo;
 	
-	@Column(name="CFO_DESCRICAO")
+	@Column(name="CFO_DESCRICAO",length=200)
 	private String  descricao;
 
 	public Cfop() {}
