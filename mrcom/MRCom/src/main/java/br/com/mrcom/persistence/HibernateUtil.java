@@ -1,7 +1,6 @@
 package br.com.mrcom.persistence;
 
 import org.hibernate.SessionFactory;
-
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Environment;
 
@@ -17,7 +16,7 @@ public class HibernateUtil {
 		
 		.setProperty(Environment.URL,"jdbc:postgresql://localhost:5432/mrcom")
 		.setProperty(Environment.USER, "postgres")
-		.setProperty(Environment.PASS, "robson78")
+		.setProperty(Environment.PASS, "162940")
 		.setProperty(Environment.SHOW_SQL, "true")
 		.setProperty(Environment.FORMAT_SQL, "true")
 		.setProperty(Environment.HBM2DDL_AUTO, "update")
@@ -29,6 +28,7 @@ public class HibernateUtil {
 		.addAnnotatedClass(br.com.mrcom.domain.bean.Cliente.class)
 		.addAnnotatedClass(br.com.mrcom.domain.bean.Endereco.class)
 		.addAnnotatedClass(br.com.mrcom.domain.bean.Estado.class)
+		.addAnnotatedClass(br.com.mrcom.domain.bean.Usuario.class)
 		
 		.buildSessionFactory();
 
