@@ -8,8 +8,9 @@ import br.com.mrcom.domain.bean.Estado;
 
 public class HibernateEstadoDaoTest {
 
+    private DaoFactory factory = (DaoFactory) DaoFactory.instance(DaoFactory.class);
+    private HibernateEstadoDao dao = (HibernateEstadoDao) factory.getEstadoDao();
 	private Estado estado = new Estado();
-	private HibernateEstadoDao dao = new HibernateEstadoDao(Estado.class);
 	
 	@Test
 	public void testDeletaInit() {
