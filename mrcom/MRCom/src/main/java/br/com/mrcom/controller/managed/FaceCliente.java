@@ -21,7 +21,7 @@ import javax.faces.validator.ValidatorException;
 
 import br.com.mrcom.domain.bean.Cliente;
 import br.com.mrcom.domain.bean.Endereco;
-import br.com.mrcom.domain.dao.HibernateGenericDao;
+import br.com.mrcom.domain.dao.imp.HibernateGenericDao;
 import br.com.mrcom.domain.elements.Cpf;
 import br.com.mrcom.util.Util;
 
