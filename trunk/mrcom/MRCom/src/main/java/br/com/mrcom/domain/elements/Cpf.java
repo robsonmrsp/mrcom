@@ -60,7 +60,7 @@ public class Cpf implements Serializable{
 		return this.toString();
 	}
 	/**
-	 * Remove todos os caracteres N√O numÈricos e transforma a string resultant em um array de ints
+	 * Remove todos os caracteres n√£o num√©ricos e transforma a string resultant em um array de ints
 	 * @param pString 	representa o cpf
 	 * @return	um array de ints contendo 11 caracteres numericos.
 	 */
