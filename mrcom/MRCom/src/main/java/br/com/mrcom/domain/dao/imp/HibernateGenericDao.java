@@ -1,20 +1,18 @@
 package br.com.mrcom.domain.dao.imp;
 
 import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-
-import org.hibernate.criterion.*;
 
 import br.com.mrcom.domain.dao.GenericDao;
 import br.com.mrcom.persistence.HibernateUtil;
 
-public class HibernateGenericDao<T>  implements GenericDao<T>{
+public class HibernateGenericDao<T> implements GenericDao<T> {
 
 	private Session session;
 	Class<T> clazz;
@@ -25,74 +23,88 @@ public class HibernateGenericDao<T>  implements GenericDao<T>{
 		this.session = HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 
-    protected Session getSession(){
-        return this.session;
-    }
-	
-	@SuppressWarnings("unchecked")
-	public T busca(Serializable id){
-
-		T t = (T)HibernateUtil.getSessionFactory().getCurrentSession().get(clazz, id);
-		return t; 
+	protected Session getSession() {
+		return this.session;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> buscaTodos(){
+	public T busca(Serializable id) {
 
-		List<T> lista = HibernateUtil.getSessionFactory().getCurrentSession().createCriteria(clazz).setMaxResults(10).list();
+		//Problemas no teste unitario. Lança excessão quando vai buscar no banco.
+/*		T t = (T) HibernateUtil.getSessionFactory().getCurrentSession()
+				.get(clazz, id);
+		return t;*/
+		
+		T t = null;
+		Session sess = getSession();
+		try {
+			sess.getTransaction().begin();
+			t = (T) sess.get(clazz, id);		
+			sess.getTransaction().commit();
+			return t;
+		} catch (Exception e) {
+			sess.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return t;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<T> buscaTodos() {
+
+		List<T> lista = HibernateUtil.getSessionFactory().getCurrentSession()
+				.createCriteria(clazz).setMaxResults(10).list();
 
 		return lista;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> buscaPorParametros(String propriedade, String valor){
+	public List<T> buscaPorParametros(String propriedade, String valor) {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(clazz);
 
-		List<T> retorno = criteria		
-		.add(Restrictions.eq(propriedade, valor))
-		.setMaxResults(10).list();
+		List<T> retorno = criteria.add(Restrictions.eq(propriedade, valor))
+				.setMaxResults(10).list();
 
 		return retorno;
 	}
-	@SuppressWarnings("unchecked")
-	public List<T> buscaPorParametrosLike(String propriedade, String valor){
 
-		valor = "%"+valor+"%";
+	@SuppressWarnings("unchecked")
+	public List<T> buscaPorParametrosLike(String propriedade, String valor) {
+
+		valor = "%" + valor + "%";
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(clazz);
 
-		List<T> retorno = criteria
-		.setMaxResults(10)
-		.setFirstResult(10)
-		.add(Restrictions.ilike(propriedade, valor))
-		.addOrder(Order.asc(propriedade))																		
-		.list();		
+		List<T> retorno = criteria.setMaxResults(10).setFirstResult(10)
+				.add(Restrictions.ilike(propriedade, valor))
+				.addOrder(Order.asc(propriedade)).list();
 		return retorno;
 	}
 
 	/**
 	 * 
-	 * @param propriedade nome da propriedade pela qual se deseja ordenar a consulta.
-	 * @param quantidade numero maximo de registros a serem lidos
+	 * @param propriedade
+	 *            nome da propriedade pela qual se deseja ordenar a consulta.
+	 * @param quantidade
+	 *            numero maximo de registros a serem lidos
 	 * @param valorIn
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<T> buscaOrdenadoPorParametro(String propriedade, Integer quantidade, int numPagina){
+	public List<T> buscaOrdenadoPorParametro(String propriedade,
+			Integer quantidade, int numPagina) {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(clazz);
 
-		List<T> retorno = criteria
-		.setFirstResult(numPagina * quantidade)
-		.addOrder(Order.asc(propriedade))
-		.setMaxResults(quantidade)								
-		.list();		
+		List<T> retorno = criteria.setFirstResult(numPagina * quantidade)
+				.addOrder(Order.asc(propriedade)).setMaxResults(quantidade)
+				.list();
 		return retorno;
 	}
-	
+
 	public Integer getTotalRegistrosConsulta() {
 
 		return null;
@@ -104,37 +116,39 @@ public class HibernateGenericDao<T>  implements GenericDao<T>{
 	}
 
 	public void salva(T t) {
-        //Obtenho uma sessão
-        //Nesse momento temos um POJO (Serializable pojo) transiente.
-        Session sess = getSession();
-        //Nesse momento o meu pojo que era transiente agora é persistente.
-        sess.save(t);
-        //Obtenho a transação no qual minha session está inserida
-        //e faço a inserção no banco de dados.
-        //Vale lembrar que uma session pertence a uma transação.
-        //E uma transação pode ter mais de uma session.
-        //Através do método commit() é que há a sincronização com o banco de dados.
-        sess.getTransaction().commit();
-        //Fecho a minha sessão.
-        sess.close();
-        //Quando a session fecha o POJO (Serializable pojo)
-        //nesse momento deixou de ser persistente para ser desligado.
-		
+		Session sess = getSession();
+		try {
+			sess.getTransaction().begin();
+			sess.save(t);		
+			sess.getTransaction().commit();
+		} catch (Exception e) {
+			sess.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void atualiza(T t) {
-        Session sess = getSession();
-        sess.update(t);
-        sess.getTransaction().commit();
-        sess.close();
+		Session sess = getSession();
+		try {
+			sess.getTransaction().begin();
+			sess.update(t);
+			sess.getTransaction().commit();
+		} catch (Exception e) {
+			sess.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void deleta(T t) {
-        Session sess = getSession();
-        sess.delete(t);
-        sess.getTransaction().commit();
-        sess.close();
-		
+		Session sess = getSession();
+		try {
+			sess.getTransaction().begin();
+			sess.delete(t);
+			sess.getTransaction().commit();
+		} catch (Exception e) {
+			sess.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public List<T> buscaPorParametros(Map<String, String> parametroValor) {
