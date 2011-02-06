@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<project xmlns:artifact="antlib:org.apache.maven.artifact.ant" name="MRCom"  basedir=".">
+
+	<!-- propriedades do projeto com os nomes dos diretórios -->
+
+    <property name="src.dir" value="${basedir}\src" />
+    <property name="classes.dir" value="${basedir}\WEB-INF\classes" />
+	<property name="lib.dir" value="${basedir}\WEB-INF\lib" />
+    <property name="dist.dir" value="${basedir}\target\dist" />
+
+	
+	<artifact:pom id="maven.project" file="pom.xml" settingsFile="C:\Desenvolvimento\.m2\settings.xml"/>
+
+	<artifact:dependencies 
+					pathId="project.class.path"
+					filesetId="compile.fileset" 
+					sourcesFilesetId="compile.sources.fileset" 
+					useScope="compile" 
+					pomRefId="maven.project" >
+		  
+	</artifact:dependencies>
+
+    <target name="init">
+		<echo> Criando os diretorio build e dist.</echo>
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+    </target>
+
+    <target name="compile" depends="init">
+    	
+    	<!-- define a maneira de referenciar o pom. Com essa linha e a marcada em ##1, foi possível copiar as dependencias registreadas no pom. para a pasta lib-->
+		<artifact:dependencies pathId="runtime.classpath" filesetId="runtime.fileset" useScope="runtime">
+			<artifact:pom refid="maven.project" />
+		</artifact:dependencies>
+    	
+		<echo> Compilando o projeto.</echo>
+    	
+    	<copy todir="${lib.dir}" flatten="true">
+    		<!-- ##1-->
+    		<fileset refid="runtime.fileset" />
+    	</copy>
+    	
+    	<javac 
+    		srcdir="${src.dir}"
+    		includes="**" 
+    		encoding="utf-8"
+    		destdir="${classes.dir}"
+    		source="1.6" 
+    		target="1.6" 
+    		nowarn="true"
+    		debug="true" 
+    		debuglevel="lines,vars,source">
+    		<classpath>
+		      	<path location="war/WEB-INF/classes"></path>
+		      	<path refid="project.class.path"></path>
+			</classpath>
+		</javac>
+    </target>
+
+   <target name="dist" depends="compile">
+	<echo> Gerando o .jar do projeto.</echo>    
+	<jar jarfile="${dist.dir}/HelloAnt.jar" basedir="${build}">
+		<!-- Tornando o jar executável-->
+		<manifest>
+			<attribute name="Main-Class" value="exemplo.HelloAnt"/>			
+		</manifest>
+	</jar>
+    </target>
+
+<!--
+target all - target responsável por iniciar o processo default e executar a aplicação.
+-->
+    <target name="all" depends="dist">
+	<echo> Executa o projeto.</echo>
+	<java jar="${dist.dir}/HelloAnt.jar" fork="true"/>
+    </target>
+
+    <target name="clear">
+        <delete dir="${build.dir}" />
+        <delete dir="${dist.dir}" />    
+    </target>
+</project>
