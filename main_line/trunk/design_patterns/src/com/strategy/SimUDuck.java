@@ -6,7 +6,7 @@ public class SimUDuck {
 		
 		Duck duck = new MallardDuck();
 		duck.setFlyBehavior(new FlyNoWay());
-		duck.setQuackBehavior(new Quack());
+		duck.setQuackBehavior(new MuteQuack());
 		
 		//inicialmente faremos a execução dos comportamentos setados para nosso pato
 		duck.performFly();
@@ -14,6 +14,9 @@ public class SimUDuck {
 		
 		//Agora iremos ltrerar EM TEMPO DE EXECUCAO os comportamentos do pato
 		
-		
+		duck.setFlyBehavior(new FlyRocketPowered());
+		duck.setQuackBehavior(new Quack());
+		duck.performFly();
+		duck.performQuack();
 	}
 }
