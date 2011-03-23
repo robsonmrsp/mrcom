@@ -1,0 +1,158 @@
+Este se trata de uma tentativa de criar um projeto da maneira mais simples usando GWT.
+
+At� ent�o a maneira mais simples � usando o webAppCreator como abaixo.
+$$-> webAppCreator -out GisApp -maven com.gis.GisApp
+	Nesta linha:
+	- GisApp � o nome da aplica��o/pasta_do_projeto
+	- maven  � usado para criar uma estrutura do maven
+Apos o uso da linha temos:
+C:\Downloads\gwt-2.2.0\gwt-2.2.0>webAppCreator -out GisApp -maven com.gis.GisApp
+Created directory GisApp\src\main\java
+Created directory GisApp\src\main\webapp
+Created directory GisApp\src\main\webapp\WEB-INF
+Created directory GisApp\src\main\webapp\WEB-INF\lib
+Created directory GisApp\src\main\java\com\gis
+Created directory GisApp\src\main\java\com\gis\client
+Created directory GisApp\src\main\java\com\gis\server
+Created directory GisApp\src\main\java\com\gis\shared
+Created directory GisApp\src\test\java\com\gis
+Created directory GisApp\src\test\java\com\gis\client
+Created file GisApp\src\main\java\com\gis\GisApp.gwt.xml
+Created file GisApp\src\main\webapp\GisApp.html
+Created file GisApp\src\main\webapp\GisApp.css
+Created file GisApp\src\main\webapp\WEB-INF\web.xml
+Created file GisApp\src\main\java\com\gis\client\GisApp.java
+Created file GisApp\src\main\java\com\gis\client\GreetingService.java
+Created file GisApp\src\main\java\com\gis\client\GreetingServiceAsync.java
+Created file GisApp\src\main\java\com\gis\server\GreetingServiceImpl.java
+Created file GisApp\src\main\java\com\gis\shared\FieldVerifier.java
+Created file GisApp\build.xml
+Created file GisApp\pom.xml
+Created file GisApp\README.txt
+Created file GisApp\src\test\java\com\gis\GisAppJUnit.gwt.xml
+Created file GisApp\src\test\java\com\gis\client\GisAppTest.java
+Created file GisApp\.project
+Created file GisApp\.classpath
+Created file GisApp\GisApp.launch
+Created file GisApp\GisAppTest-dev.launch
+Created file GisApp\GisAppTest-prod.launch
+
+Veja que foi criada o pom.xml com as dependencias b�sicas de um projeto GWT(gwt-user, gwt-server...etc)
+Por garantia, vamos guardar (Na pasta c:\Workspace) o ZIP dessa aplica��o criada(com a data hora de hoje 26-02) para poder repetir em seguida. 
+
+## GWTTestCase 
+Foi necess�rio adicionar manualmente o modulo <inherits name="com.google.gwt.junit.JUnit"/> para que a aplica��o reconhecesse   classe de teste.
+
+## Erro de Primeira
+Apos a primeira tentativa de execu��o da classe, foi necess�rio adicionar o seguinte ao web.xml
+<servlet>
+	<servlet-name>jUnitHostImpl</servlet-name>
+	<servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>jUnitHostImpl</servlet-name>
+	<url-pattern>/gisapp/junithost/*</url-pattern>
+</servlet-mapping>
+
+## Novo Eclipse
+Criei um novo eclipse Limpo, somente com o WTP
+
+## Add MAP
+Para o uso da api de mapas foi adicionado o modulo de maps.
+  <inherits name='com.google.gwt.maps.GoogleMaps' />
+
+  ## Por garantia, a cada altera��o
+  ## Outro teste a se fazer � usar o plugin GwtDesign para a aplica��o acima.
+  
+## ERRO INICIALIZACAO MAPA
+Segundo http://code.google.com/p/gwt-google-apis/issues/detail?id=447 existe um erro conhecido na API de mapa para o GWT 2.2.0, na mesma p�gina fiz o download da api de mapa com a solu��o do problema.
+Substitui a que o maven baixou.
+
+## FUNCIONOU.
+Apos a solu��o apresentada acima, o mapa foi renderizado.
+
+#######   PRIMEIRO OK  ######
+
+Apos a primeira etapa, que consistiu da cria��o da infra para o GWT e GWT-MAP vamos adicionar a infra para grava��o de dados geograficos com o hibernate/hibernate spatial e postgre/postgis
+
+## ADICIONANDO SUPORTE A GIS
+Apos adicionar a dependencia do hibernate-spatial-postgis, o maven adicionou ao classpath todas suas dependencias. A citar Hibernate-core, hibernate-sptial, etc
+
+## Funcionou bem!
+Segunda 28-02-01:08
+
+A Aplica��o est� funcionando bem. Grava e recuper um geometry
+
+#############################3333
+Objetivo
+GWT + Spring MVC c/ IoC e DI, c/ suporte para outros m�dulos: AOP + Security + Transaction
+
+
+## Adicionando Spring ao projeto.
+Antes de qualquer coisa, lembrar de adicionar o spring atravez do maven.
+repositorio: http://mirrors.ibiblio.org/pub/mirrors/maven2/
+			 http://repository.springsource.com/maven/bundles/release/
+			 http://repository.springsource.com/maven/bundles/external
+			 http://repository.springsource.com/maven/libraries/release
+			 https://s3browse.springsource.com/browse/repository.springsource.com/maven <-- outra url MAIS real
+<dependency> 
+	<groupId>org.springframework</groupId>
+	 <artifactId>org.springframework.spring-library</artifactId>
+	 <type>libd</type>
+	 <version>3.0.0.RELEASE</version>
+</dependency>
+Usado
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+Linha procurada - > http://download.osgeo.org/webdav/geotools/org/springframework/org.springframework.spring/3.0.0.RELEASE/org.springframework.spring-3.0.0.RELEASE.jar
+
+
+
+##Adicionndo spring beans ao projeto Necess�rio para a etapa abaixo
+Da mesma forma que dicionanmos o spring-core o projeto como em "Usado" acima, adicionamos o suporte a beans spring-beans
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
+## Adicionando aos poucos o spring
+Para verificar que a aplica��o est� fucnionando bem, pelo menos da parte do spring, adicionamos um pequeno suporte ao spring da seguinte maneira
+criamos a seguinte estrutura:
+Carro
+Motor
+Caixa de marcha
+Engrenagem
+Carro tem Motor
+Carro tem CaixaMarcha
+CaixaMarcha tem Engrenagem
+
+Iremos tentar fazer a injeçãoo de dependencia desde o carro at� a engrenagem. (SUCESSO)
+
+## Ainda adicionando a injeçãoo do Hibernate por meio do spring.
+Criar um pool de conexoes. 
+Usando o commons-dbcp para "gerar" o nosso dataSource.
+Adicinar a dependencia pelo maven
+
+######      [Nota importantissima!]       #####
+A não ser que utilizemos o spring MVC ou algo parecido, não teremos a "injeção automática de beans na aplicação" ! x !
+O que isso quer dizer...
+Quando usamos um applicationContext por intermedio de um outro container, ou listener, ou filter, seja lá o 
+que for...estes faxem a plimeira chamada ao BEanFactory, ou mais precisamente ao AplicationContext do spring.
+Caso utilizemos uma "aplicação desktop" devemos fazer isso manualmente, ou seja, nos devemos executar a chamda ao appContext.getBean(...); e somente 
+quando fizer mos isso, iremos ter acesso a todas as propriedades injetadas. 
+Podemos fazer esse teste da seguinte maneira.
+Criar um Filter Servlet e injetar neste os objetos para um determinado servlet persistir um objeto qualquer.
+
+
+
+
+
+
+
+
+

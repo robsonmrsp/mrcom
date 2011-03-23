@@ -1,0 +1,2 @@
+serviceClass: com.gis.client.GreetingService
+path: 1DDF084F57851F8AE1CA4FAA4A326202.gwt.rpc
