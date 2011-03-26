@@ -43,26 +43,26 @@ public class GisApp implements EntryPoint {
   /**
    * This is the entry point method.
    */
-  public void onModuleLoad() {
-		LatLng cawkerCity = LatLng.newInstance(39.509, -98.434);
-		final MapWidget map = new MapWidget(cawkerCity, 2);
-		map.setSize("100%", "100%");
-		// Add some controls for the zoom level
-		map.addControl(new LargeMapControl());
-
-		// Add a marker
-		map.addOverlay(new Marker(cawkerCity));
-
-		// Add an info window to highlight a point of interest
-		map.getInfoWindow().open(map.getCenter(), new InfoWindowContent("Twine"));
-
-		// Add the map to the HTML host page
-		RootLayoutPanel.get().add(map);
-		map.checkResizeAndCenter();
+//  public void onModuleLoad() {
+//		LatLng cawkerCity = LatLng.newInstance(39.509, -98.434);
+//		final MapWidget map = new MapWidget(cawkerCity, 2);
+//		map.setSize("100%", "100%");
+//		// Add some controls for the zoom level
+//		map.addControl(new LargeMapControl());
+//
+//		// Add a marker
+//		map.addOverlay(new Marker(cawkerCity));
+//
+//		// Add an info window to highlight a point of interest
+//		map.getInfoWindow().open(map.getCenter(), new InfoWindowContent("Twine"));
+//
+//		// Add the map to the HTML host page
+//		RootLayoutPanel.get().add(map);
 //		map.checkResizeAndCenter();
-
-  }
-  public void onModuleLoad_() {
+////		map.checkResizeAndCenter();
+//
+//  }
+  public void onModuleLoad() {
     final Button sendButton = new Button("Send");
     final TextBox nameField = new TextBox();
     nameField.setText("GWT User");

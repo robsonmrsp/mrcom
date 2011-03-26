@@ -1,17 +1,26 @@
 package com.gis.server;
 
+import org.springframework.stereotype.Service;
+
 import com.gis.client.GreetingService;
 import com.gis.shared.FieldVerifier;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 
 /**
  * The server side implementation of the RPC service.
  */
-@SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-GreetingService {
+//@SuppressWarnings("serial")
+@Service("greetingService")
+//public class GreetingServiceImpl extends RemoteServiceServlet implements
+public class GreetingServiceImpl implements GreetingService {
 
+	private String greetString;
+	public void setGreetString(String greetString) {
+		this.greetString = greetString;
+	}
+	public String getGreetString() {
+		return greetString;
+	}
 	public String greetServer(String input) throws IllegalArgumentException {
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
@@ -21,15 +30,15 @@ GreetingService {
 			"Name must be at least 4 characters long");
 		}
 
-		String serverInfo = getServletContext().getServerInfo();
-		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+		String serverInfo = "Passou!!"; //getServletContext().getServerInfo();
+		String userAgent = "Passou denovo !!";//getThreadLocalRequest().getHeader("User-Agent");
 
 		// Escape data from the client to avoid cross-site script vulnerabilities.
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
 		return "Hello, " + input + "!<br><br>I am running " + serverInfo
-		+ ".<br><br>It looks like you are using:<br>" + userAgent;
+		+ ".<br><br>It looks like you are using:<br>" + userAgent + "greetString -> " + greetString;
 	}
 
 	/**

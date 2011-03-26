@@ -5,32 +5,49 @@
 
 <web-app>
 
-	<!-- Servlets -->
 	<servlet>
 		<servlet-name>greetServlet</servlet-name>
-		<servlet-class>com.gis.server.GreetingServiceImpl</servlet-class>
+		<servlet-class>com.gis.server.SpringGwtRemoteServiceServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>greetServlet</servlet-name>
-		<url-pattern>/gisapp/greet</url-pattern>
+		<url-pattern>/gisapp/services/*</url-pattern>
 	</servlet-mapping>
 
+	<!-- Servlets -->
+	<!-- <servlet> -->
+	<!-- <servlet-name>greetServlet</servlet-name> -->
+	<!-- <servlet-class>com.gis.server.GreetingServiceImpl</servlet-class> -->
+	<!-- </servlet> -->
+
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>greetServlet</servlet-name> -->
+	<!-- <url-pattern>/gisapp/greet</url-pattern> -->
+	<!-- </servlet-mapping> -->
+
 	<!-- Default page to serve -->
+	
 	<welcome-file-list>
 		<welcome-file>GisApp.html</welcome-file>
 	</welcome-file-list>
+	
 	<servlet>
 		<servlet-name>jUnitHostImpl</servlet-name>
 		<servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>jUnitHostImpl</servlet-name>
+		<!-- <url-pattern>/gisapp/junithost/*</url-pattern> -->
 		<url-pattern>/gisapp/junithost/*</url-pattern>
 	</servlet-mapping>
+
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
         </listener-class>
 	</listener>
+
 </web-app>

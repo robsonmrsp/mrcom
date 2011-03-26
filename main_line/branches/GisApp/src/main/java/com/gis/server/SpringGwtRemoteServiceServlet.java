@@ -1,8 +1,10 @@
-/*package com.gis.server;
+package com.gis.server;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -14,9 +16,10 @@ import com.google.gwt.user.server.rpc.RPCRequest;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
+@Service("greetingService")
 public class SpringGwtRemoteServiceServlet extends RemoteServiceServlet {
 
-	private static final Logger LOG = Logger.getLogger(SpringGwtRemoteServiceServlet.class);
+	private static final Log LOG = LogFactory.getLog(SpringGwtRemoteServiceServlet.class);
 
 	@Override
 	public void init() {
@@ -42,14 +45,14 @@ public class SpringGwtRemoteServiceServlet extends RemoteServiceServlet {
 		}
 	}
 
-	*//**
+	/**
 	 * Determine Spring bean to handle request based on request URL, e.g. a
 	 * request ending in /myService will be handled by bean with name
 	 * "myService".
 	 *
 	 * @param request
 	 * @return handler bean
-	 *//*
+	 **/
 	protected Object getBean(HttpServletRequest request) {
 		String service = getService(request);
 		Object bean = getBean(service);
@@ -62,12 +65,12 @@ public class SpringGwtRemoteServiceServlet extends RemoteServiceServlet {
 		return bean;
 	}
 	
-	*//**
+	/**
 	 * Parse the service name from the request URL.
 	 *
 	 * @param request
 	 * @return bean name
-	 *//*
+	 **/
 	protected String getService(HttpServletRequest request) {
 		String url = request.getRequestURI();
 		String service = url.substring(url.lastIndexOf("/") + 1);
@@ -78,14 +81,14 @@ public class SpringGwtRemoteServiceServlet extends RemoteServiceServlet {
 	}
 
 	
-	*//**
+	/**
 	 * Look up a spring bean with the specified name in the current web
 	 * application context.
 	 *
 	 * @param name
 	 *            bean name
 	 * @return the bean
-	 *//*
+	 **/
 	protected Object getBean(String name) {
 		WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		if (applicationContext == null) {
@@ -99,4 +102,3 @@ public class SpringGwtRemoteServiceServlet extends RemoteServiceServlet {
 		return applicationContext.getBean(name);
 	}
 }
-*/
