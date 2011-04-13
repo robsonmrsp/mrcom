@@ -24,6 +24,8 @@
 			<url>http://repo2.maven.org/maven2</url>
 		</repository>
 
+
+
 		<!--Para uso do hibernate spatial (ABAIXO) -->
 		<repository>
 			<id>OSGEO GeoTools repo</id>
@@ -60,17 +62,24 @@
 			<artifactId>spring-core</artifactId>
 			<version>${springVersion}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${springVersion}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springVersion}</version>
+		</dependency>
+
+		<!-- jsr 330 -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
 
 		<!--PAra que o hibernate possa ser "injetdo pelo spring" -->
@@ -95,11 +104,11 @@
 		<!--Para uso do hibernate Spatial (ACIMA) -->
 
 		<!-- the Postgis JDBC driver -->
-		<dependency>
-			<groupId>org.postgis</groupId>
-			<artifactId>postgis-jdbc</artifactId>
-			<version>1.5.0</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.postgis</groupId> -->
+		<!-- <artifactId>postgis-jdbc</artifactId> -->
+		<!-- <version>1.5.0</version> -->
+		<!-- </dependency> -->
 
 		<!-- the postgresql driver -->
 		<dependency>
