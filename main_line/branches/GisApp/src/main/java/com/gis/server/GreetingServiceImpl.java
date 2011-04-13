@@ -1,6 +1,6 @@
 package com.gis.server;
 
-import org.springframework.stereotype.Service;
+import javax.inject.Named;
 
 import com.gis.client.GreetingService;
 import com.gis.shared.FieldVerifier;
@@ -10,7 +10,7 @@ import com.gis.shared.FieldVerifier;
  * The server side implementation of the RPC service.
  */
 //@SuppressWarnings("serial")
-@Service("greetingService")
+@Named("greetingService")
 //public class GreetingServiceImpl extends RemoteServiceServlet implements
 public class GreetingServiceImpl implements GreetingService {
 
@@ -29,7 +29,6 @@ public class GreetingServiceImpl implements GreetingService {
 			throw new IllegalArgumentException(
 			"Name must be at least 4 characters long");
 		}
-
 		String serverInfo = "Passou!!"; //getServletContext().getServerInfo();
 		String userAgent = "Passou denovo !!";//getThreadLocalRequest().getHeader("User-Agent");
 
