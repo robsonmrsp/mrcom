@@ -156,3 +156,24 @@ Criar um Filter Servlet e injetar neste os objetos para um determinado servlet p
 
 
 
+
+
+
+
+
+
+
+####### [Nota importante ]    #####
+Apos passar várias horas com problemas na carga do contexto do spring(o spring não carregava os beans anotados ao usar o context:component-scan). Vi que o 
+problema ocorria quando estava em testes. Para resolver o problema tive que "buildar" a aplicação para que funcionasse corretamente, pois assim é copiado 
+as dependencias gerenciadas pelo  MAVEN.
+para que seja possivel executar o ANT é necessário que adicionemos a biblioteca de INTEGRAÇÂO maven-ant(maven-ant-tasks-2.0.10) à pasta lib do ant
+
+
+
+
+
+
+
+
+
