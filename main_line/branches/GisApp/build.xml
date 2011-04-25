@@ -4,7 +4,7 @@
   <property name="gwt.args" value="" />
 
   <!-- Configure path to GWT SDK -->
-  <property name="gwt.sdk" location="C:/Desenvolvimento/frameworks/gwt/gwt-2.0.4" />
+  <property name="gwt.sdk" location="D:/frameworks/gwt-2.2.0" />
 
 	
 	<artifact:pom id="maven.project" file="pom.xml"/>
@@ -157,7 +157,7 @@ Test targets suppressed because -junit argument was not specified when running w
 
   <target name="build" depends="gwtc" description="Build this project" />
 
-  <target name="war" depends="build" description="Create a war file">
+  <target name="war" depends="clean, build" description="Create a war file">
     <zip destfile="GisApp.war" basedir="src/main/webapp"/>
   </target>
 
