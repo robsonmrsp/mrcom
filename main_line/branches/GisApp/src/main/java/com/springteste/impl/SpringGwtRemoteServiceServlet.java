@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -27,7 +25,6 @@ public class SpringGwtRemoteServiceServlet extends RemoteServiceServlet{
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Spring GWT service exporter deployed");
 		}
-//		WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 	}
 
 	@Override

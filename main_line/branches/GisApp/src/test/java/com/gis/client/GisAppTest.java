@@ -1,5 +1,7 @@
 package com.gis.client;
 
+import com.gis.client.services.GreetingService;
+import com.gis.client.services.GreetingServiceAsync;
 import com.gis.shared.FieldVerifier;
 
 import com.google.gwt.core.client.GWT;
