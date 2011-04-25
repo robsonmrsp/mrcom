@@ -11,11 +11,14 @@
 	<name>com.gis.GisApp</name>
 
 	<repositories>
-
 		<!-- add JBOSS repository for easy access to Hibernate libraries -->
 		<repository>
 			<id>JBOSS</id>
 			<url>http://repository.jboss.com/maven2</url>
+		</repository>
+		<repository>
+			<id>JBOSS2</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 		</repository>
 
 		<repository>
@@ -23,9 +26,11 @@
 			<name>central</name>
 			<url>http://repo2.maven.org/maven2</url>
 		</repository>
-
-
-
+		<repository>
+			<id>jahia</id>
+			<name>jahiaMaven</name>
+			<url>http://maven.jahia.org/maven2/</url>
+		</repository>
 		<!--Para uso do hibernate spatial (ABAIXO) -->
 		<repository>
 			<id>OSGEO GeoTools repo</id>
@@ -36,12 +41,11 @@
 			<url>http://www.hibernatespatial.org/repository</url>
 		</repository>
 		<!--Para uso do hibernate spatial (ACIMA) -->
-
 	</repositories>
 	<properties>
-
 		<!-- Convenience property to set the GWT version -->
 		<springVersion>3.0.5.RELEASE</springVersion>
+		<hibernate.version>3.5.1-Final</hibernate.version>
 		<gwtVersion>2.2.0</gwtVersion>
 
 		<!-- GWT needs at least java 1.5 -->
@@ -57,6 +61,11 @@
 			<version>1.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId>
+			<version>2.2.3</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -95,6 +104,12 @@
 			<version>${springVersion}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springVersion}</version>
+		</dependency>
+
 		<!--Para uso do hibernate Spatial (ABAIXO) -->
 		<dependency>
 			<groupId>org.hibernatespatial</groupId>
@@ -103,18 +118,27 @@
 		</dependency>
 		<!--Para uso do hibernate Spatial (ACIMA) -->
 
+		<!-- java.lang.ClassNotFoundException: org.aspectj.weaver.reflect.ReflectionWorld$ReflectionWorldException -->
+		<dependency>
+			<groupId>aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.5.3</version>
+		</dependency>
 		<!-- the Postgis JDBC driver -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.postgis</groupId> -->
-		<!-- <artifactId>postgis-jdbc</artifactId> -->
-		<!-- <version>1.5.0</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.postgis</groupId>
+			<artifactId>postgis-jdbc</artifactId>
+			<version>1.5.0</version>
+		</dependency>
 
 		<!-- the postgresql driver -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>provided</scope>
+			<!-- Com essa linha abaixo, o arquivo de driver não foi copiado para a 
+				pasta lib da aplicação, consequentemente o war não foi completo -->
+			<!-- <scope>provided</scope> -->
+
 			<version>8.4-701.jdbc3</version>
 		</dependency>
 
@@ -130,19 +154,26 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
-			<version>3.3.1.GA</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.3.0.ga</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.hibernate</groupId> -->
+		<!-- <artifactId>hibernate-commons-annotations</artifactId> -->
+		<!-- <version>3.3.0.ga</version> -->
+		<!-- <version>${hibernate.version}</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.3.2.GA</version>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 		<!-- Para uso das ANNOTATIONS do JPA (ABAIXO) -->
 
@@ -181,7 +212,7 @@
 
 	<build>
 		<!-- Generate compiled stuff in the folder used for developing mode -->
-		<outputDirectory>target/www/WEB-INF/classes</outputDirectory>
+		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 
 		<plugins>
 
@@ -204,7 +235,8 @@
 					<!-- URL that should be automatically opened in the GWT shell (gwt:run). -->
 					<runTarget>GisApp.html</runTarget>
 					<!-- Location of the develop-mode web application structure (gwt:run). -->
-					<hostedWebapp>target/www</hostedWebapp>
+					<!-- <hostedWebapp>target/www</hostedWebapp> ### -->
+					<hostedWebapp>src/main/webapp</hostedWebapp>
 					<!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
 					<soyc>true</soyc>
 				</configuration>
@@ -226,7 +258,9 @@
 					<systemProperties>
 						<property>
 							<name>gwt.args</name>
-							<value>-out target/www</value>
+							<!-- src/main/webapp/WEB-INF/classes -->
+							<!-- <value>-out target/www</value> -->
+							<value>-out src/main/webapp</value>
 						</property>
 					</systemProperties>
 				</configuration>

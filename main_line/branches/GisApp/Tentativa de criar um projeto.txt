@@ -154,20 +154,38 @@ Criar um Filter Servlet e injetar neste os objetos para um determinado servlet p
 
 
 
-
-
-
-
-
-
-
-
-
 ####### [Nota importante ]    #####
 Apos passar várias horas com problemas na carga do contexto do spring(o spring não carregava os beans anotados ao usar o context:component-scan). Vi que o 
 problema ocorria quando estava em testes. Para resolver o problema tive que "buildar" a aplicação para que funcionasse corretamente, pois assim é copiado 
 as dependencias gerenciadas pelo  MAVEN.
 para que seja possivel executar o ANT é necessário que adicionemos a biblioteca de INTEGRAÇÂO maven-ant(maven-ant-tasks-2.0.10) à pasta lib do ant
+
+
+
+não esquecer que o eclipse TAMBEM precisa da biblioteca maven no ant
+
+
+Uma vez descoberto como realizar a injeção de dependencia, pensar em como fazer a segurança. Verificar se já é possivel usar a parte de segurança e logging nativa do GWT
+
+
+###################     IMPORTANTE########################3
+NÃO SEI POR QUE, EM MODO DEBUG, A APLICAÇÃO ESTAVA ACESSANDO A PASTA EM QUE O ANT GRAVA OS BINÁRIOS. AO INVEZ DE ACESSAR OS ARQUIVOS QUE O PROPRIO ECLIPSE CONPILA.
+
+PARA TENTAR RESOLVER O PROBLEMA, TIVE QUE ALTERAR TODAS AS REFERENCIAS À target/www NO POM.xml E VER NO QUE DÁ; 
+
+
+
+##############################                    23/04/2011 01:09
+Problemas com transações. USando Hibernate + Spring
+
+Pelo que pude perceber, por mais que o hibernate salve os registros, estes não são persistidos no banco. Ao que 
+tudo indica(e um experimento comprovou) o probema reside na falta de uma transação. Mesmo criando uma session e 
+jogando objetos nesta, não estamos "commitando ao final" Devemos descobrir como fazer o Spring reconhecer a transação do 
+hibernate e realizar o commit.
+Maneiras:
+	Usando Spring AOP
+	Usando o tx.annotation-driven transaction-manager=...
+
 
 
 
