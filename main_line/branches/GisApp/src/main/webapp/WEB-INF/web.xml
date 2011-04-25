@@ -55,4 +55,12 @@
 			org.springframework.web.context.ContextLoaderListener
         </listener-class>
 	</listener>
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>UserService</servlet-name> -->
+<!-- 		<servlet-class>com.gis.server.UserServiceImpl</servlet-class> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>UserService</servlet-name> -->
+<!-- 		<url-pattern>/com.gis.GisAppJUnit/UserService</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 </web-app>
