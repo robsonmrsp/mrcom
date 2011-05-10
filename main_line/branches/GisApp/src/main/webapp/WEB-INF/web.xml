@@ -21,6 +21,11 @@
 		<servlet-name>greetServlet</servlet-name>
 		<url-pattern>/gisapp/services/*</url-pattern>
 	</servlet-mapping>
+	
+<!-- 	<context-param> -->
+<!-- 		<param-name>contextConfigLocation</param-name> -->
+<!-- 		<param-value>WEB-INF/applicationContext.xml</param-value> -->
+<!-- 	</context-param> -->
 
 	<!-- Servlets -->
 	<!-- <servlet> -->
@@ -51,16 +56,30 @@
 	</servlet-mapping>
 
 	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>UserService</servlet-name> -->
-<!-- 		<servlet-class>com.gis.server.UserServiceImpl</servlet-class> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>UserService</servlet-name> -->
-<!-- 		<url-pattern>/com.gis.GisAppJUnit/UserService</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	<!-- <servlet> -->
+	<!-- <servlet-name>UserService</servlet-name> -->
+	<!-- <servlet-class>com.gis.server.UserServiceImpl</servlet-class> -->
+	<!-- </servlet> -->
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>UserService</servlet-name> -->
+	<!-- <url-pattern>/com.gis.GisAppJUnit/UserService</url-pattern> -->
+	<!-- </servlet-mapping> -->
+	<!-- <filter> -->
+	<!-- <filter-name>hibernateFilter</filter-name> -->
+	<!-- <filter-class> -->
+	<!-- com.gis.server.web.RealOpenSessionInViewFilter -->
+	<!-- </filter-class> -->
+	<!-- <init-param> -->
+	<!-- <param-name>flushMode</param-name> -->
+	<!-- <param-value>MANUAL</param-value> -->
+	<!-- </init-param> -->
+	<!-- </filter> -->
+
+	<!-- <filter-mapping> -->
+	<!-- <filter-name>hibernateFilter</filter-name> -->
+	<!-- <url-pattern>/gisapp/services/*</url-pattern> -->
+	<!-- </filter-mapping> -->
+
 </web-app>
