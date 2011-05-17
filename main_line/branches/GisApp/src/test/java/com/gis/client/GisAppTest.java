@@ -3,11 +3,9 @@ package com.gis.client;
 import com.gis.client.services.GreetingService;
 import com.gis.client.services.GreetingServiceAsync;
 import com.gis.shared.FieldVerifier;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 /**
  * GWT JUnit tests must extend GWTTestCase.
@@ -40,7 +38,7 @@ public class GisAppTest extends GWTTestCase {
   public void testGreetingService() {
     // Create the service that we will test.
     GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-    ServiceDefTarget target = (ServiceDefTarget) greetingService;
+//    ServiceDefTarget target = (ServiceDefTarget) greetingService;
 //    target.setServiceEntryPoint(GWT.getModuleBaseURL() + "gisapp/greet");
 
     // Since RPC calls are asynchronous, we will need to wait for a response
