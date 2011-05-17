@@ -20,7 +20,7 @@
 		annotation. -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.gis.server" />
-	
+
 	<tx:annotation-driven />
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -35,6 +35,11 @@
 		<property name="password" value="robson78" />
 	</bean>
 
+<!-- 	<aop:config> -->
+<!-- 		<aop:pointcut expression="/*save" id="" /> -->
+<!-- 		<aop:pointcut expression="/*update" id="" /> -->
+<!-- 	</aop:config> -->
+	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 		scope="singleton">
