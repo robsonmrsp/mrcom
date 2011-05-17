@@ -1,7 +1,7 @@
 package com.gis.client;
 
 import com.extjs.gxt.ui.client.widget.Window;
-import com.gis.client.actions.ActionFormUser;
+import com.gis.client.actions.HandlerFormUser;
 import com.gis.client.services.GreetingService;
 import com.gis.client.services.GreetingServiceAsync;
 import com.gis.shared.FieldVerifier;
@@ -61,7 +61,7 @@ public class GisApp implements EntryPoint {
 	//
 	//  }
 	public void onModuleLoad() {
-		ActionFormUser actionFormUser  = new ActionFormUser();
+		HandlerFormUser actionFormUser  = new HandlerFormUser();
 		Window formUser = actionFormUser.getFormUser();
 		RootPanel.get().add(formUser);
 		formUser.show();
