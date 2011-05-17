@@ -2,7 +2,10 @@ package com.gis.server.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -10,9 +13,11 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	private Long id;
+	@SequenceGenerator(name = "sq_user_id", sequenceName = "sq_user_id")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "sq_user_id")
+	private Integer id;
 	
-	@Column
+	@Column(unique=true)
 	private String name;
 	
 	@Column
@@ -20,6 +25,12 @@ public class User {
 
 	public User() {	}
 	
+	public User(String name, String password) {
+		super();
+		this.name = name;
+		this.password = password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -36,11 +47,11 @@ public class User {
 		return name;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 }

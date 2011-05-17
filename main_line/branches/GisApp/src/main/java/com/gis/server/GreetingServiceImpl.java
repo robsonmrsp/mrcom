@@ -2,8 +2,6 @@ package com.gis.server;
 
 import javax.inject.Named;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.gis.client.services.GreetingService;
 import com.gis.shared.FieldVerifier;
 

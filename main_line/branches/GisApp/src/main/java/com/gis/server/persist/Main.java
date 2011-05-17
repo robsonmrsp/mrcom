@@ -14,7 +14,7 @@ public class Main {
 		
 		User u = new User();
 		
-		u.setId(1l);
+		u.setId(1);
 		u.setName("Robson");
 		u.setPassword("Robson");
 		

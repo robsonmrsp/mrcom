@@ -1,5 +1,7 @@
 package com.gis.server;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,13 +21,13 @@ public class UserServiceImpl implements UserService {
 	BusinessUser businessUser;
 
 	@Transactional
-	public boolean save(DtoUser dtoUser) throws Exception {
+	public List<DtoUser> save(DtoUser dtoUser) throws Exception {
 		User user = new User();
-		user.setId(3l);
-		user.setName("Marcio");
-		user.setPassword("Marcio");
+		
+		user.setName(dtoUser.getName());
+		user.setPassword(dtoUser.getPassword());
 
 		businessUser.saveUser(user);
-		return true;
+		return businessUser.loadAll();
 	}
 }
