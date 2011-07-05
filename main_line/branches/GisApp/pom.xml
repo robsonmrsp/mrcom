@@ -20,6 +20,11 @@
 			<id>JBOSS2</id>
 			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 		</repository>
+		
+		<repository>
+			<id>opennms</id>
+			<url>http://repo.opennms.org/maven2</url>
+		</repository>
 
 		<repository>
 			<id>maven</id>
